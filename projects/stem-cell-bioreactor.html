@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MCCB Bioreactor | Dylan Lee</title>
+<meta name="description" content="Senior design capstone: a four-well platform for electric and magnetic stimulation of stem cells under a microscope.">
+<meta property="og:title" content="MCCB Bioreactor | Dylan Lee">
+<meta property="og:description" content="Senior design capstone: a four-well platform for electric and magnetic stimulation of stem cells under a microscope.">
+<meta name="theme-color" content="#eff1ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101314" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23b42318'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-weight='700' font-size='14' text-anchor='middle' fill='white'%3EDL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html"><b>DYLAN LEE</b><span class="mono">Mechanical Engineering · UCSD</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#work">Work</a>
+      <a href="../assets/Dylan-Lee-Resume.pdf">Resume</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap crumb"><a href="../index.html#work">← All work</a></div>
+<section class="wrap project-head">
+  <div class="eyebrow rise"><span class="label">Senior Design Capstone</span><span class="label">Team of 4</span><span class="label">01/2026–06/2026</span></div>
+  <h1 class="rise d1">MCCB: Multi-Chamber-Camera Bioreactor</h1>
+  <p class="lead rise d2">A four-well research platform that applies programmable electric and magnetic fields to stem cells while they are imaged under a microscope, built for research into stem cell differentiation and regenerative medicine.</p>
+  <div class="rise d3"><dl class="title-block"><div><dt class="label">Sponsor</dt><dd>Dr. Peter Chen, UC San Diego</dd></div><div><dt class="label">Course</dt><dd>MAE 156A/B Senior Design</dd></div><div><dt class="label">My scope</dt><dd>Chassis, H-bridge drive boards, ESP32 waveform firmware, electrode validation</dd></div><div><dt class="label">Team</dt><dd>Dylan Bailes, Kaitlyn Lavarias, Dylan Lee, Samantha Olivar</dd></div></dl></div>
+</section><section class="wrap block">
+<div class="figs two"><figure><div class="plate"><img src="../assets/img/mccb-assembly.webp" alt="The integrated MCCB on its aluminum frame with the touchscreen in front" loading="lazy" decoding="async"></div><figcaption><b>Fig. 1</b> The integrated system: four wells on a 3030 T-slot frame, with the touchscreen UI and microscope stage below.</figcaption></figure>
+<figure><div class="plate"><img src="../assets/img/mccb-coil-module.webp" alt="Helmholtz coil module with the Hall-sensor board between the coils" loading="lazy" decoding="async"></div><figcaption><b>Fig. 2</b> One well module: a Helmholtz coil pair (156 turns of 24 AWG per coil, 27 mm radius and spacing) in a printed ASA housing, with the Hall-sensor satellite board in the uniform-field region.</figcaption></figure></div>
+<div class="facts">
+<div><span class="num">4</span><p>Wells, each with its own coil pair, electrodes, and drive channels.</p></div>
+<div><span class="num">0–5<small>mT</small></span><p>Magnetic field, 0–250 Hz AC or DC, with at most 1% deviation across the well.</p></div>
+<div><span class="num">0–1.5<small>V/cm</small></span><p>Electric field, 1–100 Hz AC, within ±0.05 V/cm of the input.</p></div>
+<div><span class="num">0<small>g lost</small></span><p>Liquid loss in leak testing; 0.46 psi drop from 10 psi over 10 minutes.</p></div>
+</div></section><section class="wrap block"><h2>How it works</h2><div class="figs two"><figure><div class="plate light"><img src="../assets/img/mccb-electronics-overview.webp" alt="Control system layout: Raspberry Pi 5, ESP32, H-bridges, electrodes, and electromagnet for one well" loading="lazy" decoding="async"></div><figcaption><b>Fig. 3</b> High-level control layout for one of the four well systems (team poster, Figure 2).</figcaption></figure>
+<div class="prose"><p>A Raspberry Pi 5 touchscreen sets the stimulus for each well and records from four FLIR cameras. Each well has its own ESP32, which drives two H-bridges: one feeds the Helmholtz coil pair from a 24 V supply, and the other feeds a pair of titanium plate electrodes from 12 V.</p>
+<p>Dual Hall sensors sit in the uniform-field region between the coils and report the field back for calibration and live readings.</p>
+<p>The wells are printed in VeroClear resin with an O-ring-sealed threaded lid and a cover-glass floor, so a 20×/0.4 objective and a Sony IMX296 camera can image the cells from below.</p></div></div></section><section class="wrap block"><p class="label kicker">What I worked on</p><h2>Drive electronics</h2><div class="figs two"><div class="prose"><p>The team’s custom driver PCBs failed, so I routed and hand-soldered perfboard H-bridge modules for the electrode and electromagnet channels. The final integrated system ran on these boards.</p></div>
+<figure><div class="plate"><img src="../assets/img/mccb-control-board.webp" alt="ESP32 control board with perfboard H-bridge modules wired to a coil module" loading="lazy" decoding="async"></div><figcaption><b>Fig. 4</b> Control board: the ESP32 with the perfboard H-bridge modules, wired to a coil module.</figcaption></figure></div></section><section class="wrap block"><h2>Waveform firmware</h2><div class="prose"><p>I wrote the ESP32 firmware that generates the stimulus waveforms. It drives the H-bridges with 20 kHz PWM, and an analog low-pass filter smooths the output into sine, square, triangle, and step waveforms: 0.1–250 Hz on the coils and 0.1–100 Hz on the electrodes.</p>
+<p>A serial command sets the mode, amplitude, and frequency of each channel. The firmware also auto-zeros both Hall sensors and streams their readings at 2 kHz.</p></div>
+<div class="figs two"><figure><div class="plate"><img src="../assets/img/mccb-scope-trace.webp" alt="Oscilloscope trace of a square wave" loading="lazy" decoding="async"></div><figcaption><b>Fig. 5</b> Square wave on the electrodes, generated by the ESP32 PWM through the H-bridge.</figcaption></figure>
+<figure><div class="plate"><img src="../assets/img/mccb-hall-readings.webp" alt="Plot of two Hall-sensor readings following a square wave" loading="lazy" decoding="async"></div><figcaption><b>Fig. 6</b> Readings from both Hall sensors for a 100 Hz square-wave input.</figcaption></figure></div></section><section class="wrap block"><h2>Electrodes</h2><div class="figs two"><div class="prose"><p>I compared titanium, platinum, and gold plate electrodes on a weighted scoring matrix. Titanium won at about $0.03/g, against $70/g for platinum and $145/g for gold.</p>
+<p>I validated the electrode drive with a dry test using an INA219 current sensor, a multimeter, and a load resistor matched to saline across the 1.4 cm electrode gap (68 Ω/cm × 1.4 cm ≈ 95 Ω), then repeated it in saline. The delivered field stayed within ±0.05 V/cm of the input.</p></div>
+<figure><div class="plate light"><img src="../assets/img/mccb-electrode-validation.webp" alt="Plot of measured field against input voltage for dry and saline tests" loading="lazy" decoding="async"></div><figcaption><b>Fig. 7</b> Measured field against input voltage, dry and in saline, compared with the theoretical line.</figcaption></figure></div></section><section class="wrap block"><h2>Chassis and microscope positioning</h2><div class="prose">
+<p>I designed and fabricated the chassis on a 3030 T-slot aluminum frame, with a 3/8 in (9.525 mm) acetal mounting plate chosen over aluminum and 316 stainless steel to avoid eddy currents near the coils. I also fabricated the motor mounts and microscope platform.</p>
+<p>In 156A I wrote the component analysis for a motorized X-Y gantry to move microscopes under the wells. The requirements were under 100 µm per step (a target embryo is about 700 µm), holding position for 7 days against about 300 N of bumps and table vibration, and staying under 55 dB at 45 cm.</p>
+</div>
+<div class="table-wrap"><table class="trade">
+<thead><tr><th scope="col">Linear-motion option</th><th scope="col">Resolution</th><th scope="col">Holding force</th><th scope="col">Est. cost</th><th scope="col">Result</th></tr></thead>
+<tbody>
+<tr class="pick"><td>Leadscrew + linear rails<br><span class="mono">NEMA 17 · 3/8″-16 Acme</span></td><td class="n">3.97 µm/step</td><td class="n">~675 N</td><td class="n">$497</td><td>Met every requirement<span class="pill">Selected</span></td></tr>
+<tr><td>GT2 belt, 16T pulley</td><td class="n">80 µm/step</td><td class="n">~90 N</td><td class="n">$406</td><td>Too little holding force</td></tr>
+<tr><td>Actuonix P16-P linear actuator</td><td class="n">~300 µm</td><td class="n">500 N</td><td class="n">$546</td><td>3× too coarse; 62 dB, over the 55 dB limit</td></tr>
+</tbody></table></div>
+<div class="figs two"><div class="prose"><p>When the sponsor later asked for each microscope to move independently, the custom stage became too complex, so I switched the design to off-the-shelf XYZ stages (±6.5 mm in X/Y, 10 mm in Z, 0.01 mm steps) with a 3D-printed camera mount.</p>
+<p>During risk reduction I also prototyped a machined Delrin screw-top well with a printed TPU gasket. UV-cure adhesive would not bond to Delrin, the coverslip seal failed, and the printed gasket leaked. Those results moved the team to O-ring-sealed VeroClear wells.</p>
+<p>On the project side, I kept the Gantt chart and the $3,600 budget, wrote progress reports, and authored the applicable-standards section (IEC 61010-1, ISO 10993-1, ISO 14971) and bill of materials for the final report.</p></div>
+<figure><div class="plate"><img src="../assets/img/mccb-stage.webp" alt="Microscope tube and camera on the XYZ stage" loading="lazy" decoding="async"></div><figcaption><b>Fig. 8</b> Microscope and camera on the off-the-shelf XYZ stage with the printed mount.</figcaption></figure></div></section><section class="wrap block"><h2>Poster</h2><figure><a class="poster-link" href="../assets/docs/mccb-poster.pdf"><img src="../assets/img/mccb-poster.webp" alt="MCCB final poster" loading="lazy" decoding="async"></a><figcaption><b>Fig. 9</b> Final poster from the MAE 156B poster session. <a class="yt-link" href="../assets/docs/mccb-poster.pdf">Open the full poster (PDF, 3.7 MB) ↗</a></figcaption></figure></section><section class="wrap block"><h2>Team</h2><div class="credits">
+<div><b>Dylan Bailes</b><span>Electromagnets and Helmholtz coils, field simulations, final UI.</span></div>
+<div><b>Kaitlyn Lavarias</b><span>UI and electronics, controls research, optics validation.</span></div>
+<div><b>Dylan Lee</b><span>Chassis, perfboard H-bridge boards, ESP32 waveform firmware, electrode selection and validation, project management.</span></div>
+<div><b>Samantha Olivar</b><span>Well and electrode design, fabrication and sterilization, purchasing.</span></div>
+</div></section><div class="wrap"><a class="next" href="3-axis-gantry.html"><span class="label">Next project</span><span class="title">3-Axis Gantry <span class="arrow" aria-hidden="true">→</span></span></a></div>
+</main>
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Get in touch</h2>
+      <p class="fineprint">Open to mechanical design, robotics, and hardware roles.</p>
+    </div>
+    <div class="contact">
+      <div class="contact-row"><span class="label">Email</span><a class="val" href="mailto:dylanjoshualee@gmail.com">dylanjoshualee@gmail.com</a><button class="copy" type="button" data-copy="dylanjoshualee@gmail.com">Copy</button></div>
+      <div class="contact-row"><span class="label">Phone</span><a class="val" href="tel:+13109385541">+1 (310) 938-5541</a><button class="copy" type="button" data-copy="+1 (310) 938-5541">Copy</button></div>
+      <div class="contact-row"><span class="label">GitHub</span><a class="val" href="https://github.com/mildlyuseful" target="_blank" rel="noopener">Dylan Lee on GitHub ↗</a></div>
+      <div class="contact-row"><span class="label">Resume</span><a class="val" href="../assets/Dylan-Lee-Resume.pdf">Dylan-Lee-Resume.pdf</a></div>
+      <p class="fineprint">© 2026 Dylan Lee · San Diego, California</p>
+    </div>
+  </div>
+</footer>
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged image">
+  <button class="close" type="button">Close</button>
+  <img src="data:," alt="">
+  <p></p>
+</dialog>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
